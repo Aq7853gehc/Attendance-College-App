@@ -3,7 +3,6 @@ import React from "react";
 import { Tabs } from "expo-router";
 import { icons } from "@/constants";
 
-
 type TabIconProps = {
   icon?: ImageSourcePropType;
   color: string;
@@ -28,13 +27,53 @@ const TabIcon = ({ icon, color, name, focused }: TabIconProps) => {
 
 const TabLayout = () => {
   return (
-    <Tabs>
+    <Tabs
+    screenOptions={{
+      tabBarShowLabel:false
+    }}>
       <Tabs.Screen
         name="home"
         options={{
           headerShown: false,
           title: "Home",
-          tabBarIcon: ({ color, focused }) => <TabIcon />,
+          tabBarIcon: ({ color, focused }) => (
+            <TabIcon
+              icon={icons.home}
+              color={color}
+              focused={focused}
+              name="Home"
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="attendance"
+        options={{
+          headerShown: false,
+          title: "attendance",
+          tabBarIcon: ({ color, focused }) => (
+            <TabIcon
+              icon={icons.attendance}
+              color={color}
+              focused={focused}
+              name="Attendance"
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          headerShown: false,
+          title: "Profile",
+          tabBarIcon: ({ color, focused }) => (
+            <TabIcon
+              icon={icons.user}
+              color={color}
+              focused={focused}
+              name="Profile"
+            />
+          ),
         }}
       />
     </Tabs>

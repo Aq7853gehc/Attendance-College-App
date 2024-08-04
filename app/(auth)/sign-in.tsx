@@ -1,12 +1,21 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text, Button } from "react-native";
+import React from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { router } from "expo-router";
 
 const SignIn = () => {
   return (
-    <View>
-      <Text>SignIn</Text>
-    </View>
-  )
-}
+    <SafeAreaView className="flex-1">
+      <View className="flex-1 items-center justify-center">
+        <Text className="text-2xl font-bold">SignIn</Text>
 
-export default SignIn
+        <Text>Don't have account</Text>
+        <Button title="Sign up" 
+        onPress={()=>router.replace("/sign-up")}/>
+      </View>
+
+    </SafeAreaView>
+  );
+};
+
+export default SignIn;
