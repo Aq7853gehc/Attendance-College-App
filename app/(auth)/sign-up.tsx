@@ -11,7 +11,7 @@ const SignUp = () => {
 
       <Text>Already  have an account</Text>
       <Button title="Sign in" 
-      onPress={()=>router.replace("/sign-in")}/>
+      onPress={()=>router.push("")}/>
     </View>
 
   </SafeAreaView>
