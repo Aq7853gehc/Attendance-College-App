@@ -10,13 +10,10 @@ const SignIn = () => {
         <Text className="text-2xl font-bold">SignIn</Text>
 
         <Text>Don't have account</Text>
-        <Button title="Sign up" 
-        onPress={()=>router.push("/sign-up")}/>
+        <Button title="Sign up" onPress={() => router.push("/sign-up")} />
       </View>
 
-      <Button title="Home"
-      onPress={()=>router.push("/home")}/>
-
+      <Button title="Home" onPress={() => router.push("/home")} />
     </SafeAreaView>
   );
 };

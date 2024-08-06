@@ -7,6 +7,8 @@ import {
   ScrollView,
   RefreshControl,
   Linking,
+  StatusBar,
+
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -58,7 +60,7 @@ const index = () => {
 
         await Location.startGeofencingAsync("entering", region);
       }
-      console.log(status);
+      console.log("Location "+status);
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location);
     })();
@@ -75,8 +77,8 @@ const index = () => {
           <View className="w-[300px] h-[300px] items-center">
             <Image source={image.homeImage} className="w-full h-full" />
             <View className="border-[0.3px] w-full relative bottom-5"></View>
-            <Text>{location?.coords.latitude}</Text>
-            <Text>{location?.coords.longitude}</Text>
+            {/* <Text>{location?.coords.latitude}</Text>
+            <Text>{location?.coords.longitude}</Text> */}
           </View>
           <View className="flex-row w-full justify-evenly">
             <Button title="Login" onPress={() => router.push("/sign-in")} />
@@ -86,13 +88,15 @@ const index = () => {
       ) : (
         <View className="flex-1 h-full w-full items-center justify-center gap-y-10">
           <Text className="text-3xl font-bold text-red-600">
-            Permit the location & Reach the location
+            Permit the location & You'r not in region
           </Text>
           <Button title="Location" onPress={() => Linking.openSettings()} />
+
           <Text>{location?.coords.latitude}</Text>
           <Text>{location?.coords.longitude}</Text>
         </View>
       )}
+      <StatusBar barStyle={"dark-content"} backgroundColor={"white"}/>
     </SafeAreaView>
   );
 };

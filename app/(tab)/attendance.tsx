@@ -41,8 +41,10 @@ const LocalAuth = (props: any) => {
     })
     if (result.success){
         Alert.alert("Authentication successfull")
+        console.log(result)
     } else{
         Alert.alert("Failed to authentication")
+        console.log(result)
     }
   };
 
