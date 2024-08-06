@@ -7,6 +7,17 @@ import * as Location from "expo-location";
 import PermissionLocation from "@/components/PermissionLocation";
 
 const index = () => {
+  const permentLocation:Location.LocationObjectCoords = {
+    latitude:28.635349,
+    longitude:77.273376,
+    accuracy:50,
+    altitude:null,
+    altitudeAccuracy:null,
+    heading:null,
+    speed:null
+
+  }
+
   const [location, setLocation] = useState<Location.LocationObject>();
   const [errorMsg, setErrorMsg] = useState<string>();
 
@@ -26,9 +37,9 @@ const index = () => {
   
   return (
     <SafeAreaView className="flex-1 h-screen w-screen">
-      {Location.PermissionStatus.DENIED   ? (
+      {Location.PermissionStatus.DENIED && location?.coords === permentLocation  ? (
         <View className="flex-1 items-center justify-center">
-          <Text>Permit the location</Text>
+          <Text className="text-red-500 text-3xl font-black">Permit the location AND Reach to the location </Text>
           
         </View>
       ) : (
@@ -52,3 +63,10 @@ const index = () => {
 };
 
 export default index;
+
+
+
+
+//  Near my place
+// latitude : 28.635349
+// longitute : 77.273376
