@@ -40,10 +40,10 @@ const LocalAuth = (props: any) => {
         fallbackLabel:"Use Passcode"
     })
     if (result.success){
-        Alert.alert("Authentication successfull")
+        Alert.alert("Attendance Marked")
         console.log(result)
     } else{
-        Alert.alert("Failed to authentication")
+        Alert.alert("Attendance Marked failed")
         console.log(result)
     }
   };
