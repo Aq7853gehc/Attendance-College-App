@@ -16,11 +16,12 @@ import { image } from "@/constants";
 import { router } from "expo-router";
 import * as Location from "expo-location";
 import * as TaskManager from "expo-task-manager";
-// import PermissionLocation from "@/components/PermissionLocation";
 
 const permentLocation: Location.LocationRegion = {
-  latitude: 28.6365382,
-  longitude: 77.2728965,
+  latitude: 28.6365819, //28.5594146
+  longitude: 77.2727257, //77.2765477
+  notifyOnEnter: true,
+
   radius: 50,
 };
 
@@ -43,6 +44,7 @@ const haversineDistance = (
       Math.sin(deltaLon / 2) *
       Math.sin(deltaLon / 2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  console.log(c);
 
   const distance = R * c; // in meters
   return distance;
@@ -52,29 +54,6 @@ const index = () => {
   const [location, setLocation] = useState(null);
   const [ustatus, setUstatus] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
-
-  const permentLocation = {
-    latitude: 28.6365382,
-    longitude: 77.2728965,
-    radius: 50, // Example radius in meters
-  };
-
-  const haversineDistance = (coords1, coords2) => {
-    // Haversine formula implementation
-    const toRad = (x) => (x * Math.PI) / 180;
-    const R = 6371; // Radius of the Earth in km
-    const dLat = toRad(coords2.latitude - coords1.latitude);
-    const dLon = toRad(coords2.longitude - coords1.longitude);
-    const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(toRad(coords1.latitude)) *
-        Math.cos(toRad(coords2.latitude)) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const d = R * c; // Distance in km
-    return d * 1000; // Distance in meters
-  };
 
   const onRefresh = async () => {
     setRefreshing(true);
@@ -86,7 +65,7 @@ const index = () => {
     }
 
     const newLocation = await Location.getCurrentPositionAsync({
-      accuracy: Location.Accuracy.High,
+      accuracy: Location.Accuracy.Balanced,
     });
 
     setLocation(newLocation);
@@ -120,7 +99,7 @@ const index = () => {
         {
           accuracy: Location.Accuracy.High,
           timeInterval: 1000, // Update every 1 seconds
-          distanceInterval: 2, // Update every 10 meters
+          distanceInterval: 3, //
         },
         (newLocation) => {
           setLocation(newLocation);
@@ -128,7 +107,7 @@ const index = () => {
             {
               latitude: newLocation.coords.latitude,
               longitude: newLocation.coords.longitude,
-              radius: 0,
+              radius: 5,
             },
             permentLocation
           );
@@ -146,44 +125,6 @@ const index = () => {
       };
     })();
   }, []);
-  // useEffect(() => {
-  //   (async () => {
-  //     const { status } = await Location.requestForegroundPermissionsAsync();
-  //     if (status !== "granted") {
-  //       Alert.alert("Permission to access location was denied");
-  //       return;
-  //     }
-
-  //     const locationSubscription = await Location.watchPositionAsync(
-  //       {
-  //         accuracy: Location.Accuracy.High,
-  //         timeInterval: 1000, // Update every 1 seconds
-  //         distanceInterval: 2, // Update every 10 meters
-  //       },
-  //       (newLocation) => {
-  //         setLocation(newLocation);
-  //         const distance = haversineDistance(
-  //           {
-  //             latitude: newLocation.coords.latitude,
-  //             longitude: newLocation.coords.longitude,
-  //             radius: 0,
-  //           },
-  //           permentLocation
-  //         );
-
-  //         if (distance <= permentLocation.radius) {
-  //           setUstatus(true);
-  //         } else {
-  //           setUstatus(false);
-  //         }
-  //       }
-  //     );
-
-  //     return () => {
-  //       locationSubscription.remove();
-  //     };
-  //   })();
-  // }, []);
 
   return (
     <SafeAreaView className="flex-1 h-screen w-screen">
@@ -208,7 +149,10 @@ const index = () => {
             </View>
             <View className="flex-row w-full justify-evenly">
               <Button title="Login" onPress={() => router.push("/sign-in")} />
-              <Button title="Login" onPress={() => router.push("/sign-in")} />
+              <Button
+                title="Register"
+                onPress={() => router.push("/sign-up")}
+              />
             </View>
           </View>
         ) : (

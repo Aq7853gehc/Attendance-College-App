@@ -1,4 +1,5 @@
-import { Client } from "react-native-appwrite";
+import { ExpoRoot } from "expo-router";
+import { Account, Client, Databases, ID } from "react-native-appwrite";
 
 export const config = {
   endpoint: "https://cloud.appwrite.io/v1",
@@ -15,5 +16,46 @@ client
   .setProject(config.projectId)
   .setPlatform(config.platform);
 
+export const account = new Account(client);
+const database = new Databases(client);
+
+// for new account user
+export const createUser = async ({
+  email,
+  password,
+  empId,
+}: {
+  email: string;
+  password: string;
+  empId: string;
+}) => {
+  try {
+    const newAccount = account.create(ID.unique(), email, password, empId);
+    if (!newAccount) throw Error;
+    await signIn(empId, password);
+    const newUser = database.createDocument(
+      config.databaseId,
+      config.userCollectionId,
+      ID.unique(),
+      {
+        accountId: (await newAccount).$id,
+        email,
+        empId,
+      }
+    );
+    return newUser;
+  } catch (err) {
+    console.log(err);
+    throw new Error();
+  }
+};
+
+export const signIn = async (empId: string, password: string,) => {
+  try {
+    await account.createEmailPasswordSession(empId, password);
+  } catch (error) {
+    throw new Error;
+  }
+};
 
 

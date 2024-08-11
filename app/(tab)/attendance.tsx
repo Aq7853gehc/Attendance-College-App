@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  
-  Image,
-  Alert,
-} from "react-native";
+import { View, Text, TouchableOpacity, Image, Alert } from "react-native";
 // import Image from 'react-native-scalable-image';
 import * as LocalAuthentication from "expo-local-authentication";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -35,16 +28,16 @@ const LocalAuth = (props: any) => {
   };
 
   const scanFingerprint = async () => {
-   const result =  await LocalAuthentication.authenticateAsync({
-        promptMessage:"Authentication with fingerprint",
-        fallbackLabel:"Use Passcode"
-    })
-    if (result.success){
-        Alert.alert("Attendance Marked")
-        console.log(result)
-    } else{
-        Alert.alert("Attendance Marked failed")
-        console.log(result)
+    const result = await LocalAuthentication.authenticateAsync({
+      promptMessage: "Authentication with fingerprint",
+      fallbackLabel: "Use Passcode",
+    });
+    if (result.success) {
+      Alert.alert("Attendance Marked");
+      console.log(result);
+    } else {
+      Alert.alert("Attendance Marked failed");
+      console.log(result);
     }
   };
 
