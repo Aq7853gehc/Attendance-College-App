@@ -13,7 +13,9 @@ const SignIn = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const submit = () => {};
+  const submit = () => {
+    
+  };
   return (
     <SafeAreaView className="h-full">
       <StatusBar barStyle={"dark-content"}/>

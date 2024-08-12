@@ -1,5 +1,6 @@
 import { ExpoRoot } from "expo-router";
-import { Account, Client, Databases, ID } from "react-native-appwrite";
+import { Alert } from "react-native";
+import { Account, Client, Databases, ID, Query } from "react-native-appwrite";
 
 export const config = {
   endpoint: "https://cloud.appwrite.io/v1",
@@ -50,12 +51,28 @@ export const createUser = async ({
   }
 };
 
-export const signIn = async (empId: string, password: string,) => {
+export const signIn = async (empId: string, password: string) => {
   try {
     await account.createEmailPasswordSession(empId, password);
   } catch (error) {
-    throw new Error;
+    throw new Error();
   }
 };
 
+export const getCurrentUser = async () => {
+  try {
+    const currentAccount = await account.get();
+    if (!currentAccount) throw Error;
 
+    const currentUser = database.listDocuments(
+      config.databaseId,
+      config.userCollectionId,
+      [Query.equal("accountId", currentAccount.$id)]
+    );
+
+    if (!currentUser) throw Error;
+    return (await currentUser).documents[0];
+  } catch (error: any) {
+    Alert.alert("Err", error);
+  }
+};
