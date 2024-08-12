@@ -21,9 +21,9 @@ const FormField = ({
 }: FormField) => {
   const [showPassword, setShowPassword] = useState<boolean>();
   return (
-    <View className={`space-y-2 ${otherStyle} `}>
+    <View className={`space-y-1 ${otherStyle} `}>
       <Text className="text-base font-medium text-black">{title}</Text>
-      <View className="border-2 w-full h-16 bg-transparent px-4 border-neutral-400 rounded-2xl focus:border-blue-500 items-center flex-row">
+      <View className="border-2 w-full h-14 bg-transparent px-4 border-neutral-400 rounded-lg focus:border-blue-500 items-center flex-row">
         <TextInput
           className="flex-1 text-black font-medium text-base"
           value={value}

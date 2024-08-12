@@ -16,6 +16,7 @@ import { image } from "@/constants";
 import { router } from "expo-router";
 import * as Location from "expo-location";
 import * as TaskManager from "expo-task-manager";
+import CustomButton from "@/components/CustomizeButton";
 
 const permentLocation: Location.LocationRegion = {
   latitude: 28.6365819, //28.5594146
@@ -144,11 +145,15 @@ const index = () => {
             <View className="w-[300px] h-[300px] items-center">
               <Image source={image.homeImage} className="w-full h-full" />
               <View className="border-[0.3px] w-full relative bottom-5"></View>
-              <Text>{location?.coords.latitude}</Text>
-              <Text>{location?.coords.longitude}</Text>
+              {/* <Text>{location?.coords.latitude}</Text>
+              <Text>{location?.coords.longitude}</Text> */}
             </View>
             <View className="flex-row w-full justify-evenly">
-              <Button title="Login" onPress={() => router.push("/sign-in")} />
+              <Button
+                title="Login"
+                onPress={() => router.push("/sign-in")}
+            
+              />
               <Button
                 title="Register"
                 onPress={() => router.push("/sign-up")}
