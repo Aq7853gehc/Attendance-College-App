@@ -1,20 +1,36 @@
-import { View, Text, Button, ScrollView, Image, StatusBar } from "react-native";
+import { View, Text, Button, ScrollView, Image, StatusBar, Alert } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Link, router } from "expo-router";
 import FormField from "@/components/FormField";
 import CustomButton from "@/components/CustomizeButton";
 import { image } from "@/constants";
+import { createUser } from "@/lib/appwrite";
+import { Models } from "react-native-appwrite";
 
 const SignIn = () => {
   const [form, setForm] = useState({
-    empid: "",
+  empid: "",
     email:"",
     password: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const submit = () => {};
+  const submit = async() => {
+    if(!form.empid||!form.email||!form.password){
+      Alert.alert("Error","Please fill all the fields")
+    }
+    setIsSubmitting(true)
+    try {
+      const result:Models.Document = await createUser(form.email,form.password,form.empid)
+      router.replace('/home')
+      // 
+    } catch (error:any) {
+      Alert.alert("Error",error.message)
+    }finally {
+      setIsSubmitting(false)
+    }
+  };
   return (
     <SafeAreaView className="h-full">
        <StatusBar barStyle={"dark-content"}/>

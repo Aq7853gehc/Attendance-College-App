@@ -13,10 +13,11 @@ import {
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { image } from "@/constants";
-import { router } from "expo-router";
+import { Redirect, router } from "expo-router";
 import * as Location from "expo-location";
 import * as TaskManager from "expo-task-manager";
 import CustomButton from "@/components/CustomizeButton";
+import { useUserContext } from "@/context/GlobalProvider";
 
 const permentLocation: Location.LocationRegion = {
   latitude: 28.6365819, //28.5594146
@@ -55,6 +56,8 @@ const index = () => {
   const [location, setLocation] = useState(null);
   const [ustatus, setUstatus] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const {isLoading,isLoggedIn} = useUserContext()
+  if(!isLoading&&isLoggedIn)return <Redirect href={"/home"}/>
 
   const onRefresh = async () => {
     setRefreshing(true);

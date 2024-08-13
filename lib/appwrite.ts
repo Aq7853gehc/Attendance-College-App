@@ -21,15 +21,7 @@ export const account = new Account(client);
 const database = new Databases(client);
 
 // for new account user
-export const createUser = async ({
-  email,
-  password,
-  empId,
-}: {
-  email: string;
-  password: string;
-  empId: string;
-}) => {
+export const createUser = async (email: string, password: string, empId: string) => {
   try {
     const newAccount = account.create(ID.unique(), email, password, empId);
     if (!newAccount) throw Error;

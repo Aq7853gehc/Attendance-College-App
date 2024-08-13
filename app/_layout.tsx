@@ -1,15 +1,17 @@
 import { View, Text } from "react-native";
 import React from "react";
 import { Stack } from "expo-router";
+import UserProvider from "@/context/GlobalProvider";
 
 const RootLayout = () => {
   return (
-   <Stack>
-    <Stack.Screen name="index" options={{headerShown:false}}/>
-    <Stack.Screen name="(auth)" options={{headerShown:false}}/>
-    <Stack.Screen name="(tab)" options={{headerShown:false}}/>
-
-   </Stack>
+    <UserProvider>
+      <Stack>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        <Stack.Screen name="(tab)" options={{ headerShown: false }} />
+      </Stack>
+    </UserProvider>
   );
 };
 
