@@ -1,6 +1,6 @@
 {
   "cli": {
-    "version": ">= 10.2.1"
+    "version": ">= 10.2.3"
   },
   "build": {
     "development": {
@@ -8,9 +8,13 @@
       "distribution": "internal"
     },
     "preview": {
+      "android": {
+        "buildType": "apk"
+      },
       "distribution": "internal"
     },
-    "production": {}
+    "production": {
+    }
   },
   "submit": {
     "production": {}

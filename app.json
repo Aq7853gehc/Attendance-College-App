@@ -19,7 +19,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.aq432.Attendity"
     },
     "web": {
       "bundler": "metro",
@@ -37,7 +38,7 @@
         "origin": false
       },
       "eas": {
-        "projectId": "17efd626-3195-468a-93ab-047d1d95bead"
+        "projectId": "62476183-678e-4bca-bdcf-039f8350f6cc"
       }
     }
   }

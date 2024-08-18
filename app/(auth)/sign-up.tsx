@@ -1,4 +1,12 @@
-import { View, Text, Button, ScrollView, Image, StatusBar, Alert } from "react-native";
+import {
+  View,
+  Text,
+  Button,
+  ScrollView,
+  Image,
+  StatusBar,
+  Alert,
+} from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Link, router } from "expo-router";
@@ -10,34 +18,35 @@ import { Models } from "react-native-appwrite";
 
 const SignIn = () => {
   const [form, setForm] = useState({
-  empid: "",
-    email:"",
+    empid: "",
+    email: "",
     password: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const submit = async() => {
-    if(!form.empid||!form.email||!form.password){
-      Alert.alert("Error","Please fill all the fields")
+  const submit = async () => {
+    if (!form.empid || !form.email || !form.password) {
+      Alert.alert("Error", "Please fill all the fields");
+      return ;
     }
-    setIsSubmitting(true)
+    setIsSubmitting(true);
     try {
-      const result:Models.Document = await createUser(form.email,form.password,form.empid)
-      router.replace('/home')
-      // 
-    } catch (error:any) {
-      Alert.alert("Error",error.message)
-    }finally {
-      setIsSubmitting(false)
+      await createUser(form.email, form.password, form.empid)
+      router.replace("/home")
+      //
+    } catch (error: any) {
+       Alert.alert(JSON.stringify(error));
+    } finally {
+      setIsSubmitting(false);
     }
   };
   return (
     <SafeAreaView className="h-full">
-       <StatusBar barStyle={"dark-content"}/>
+      <StatusBar barStyle={"dark-content"} />
       <ScrollView>
         <View className="flex-1 justify-center px-4 my-4 w-full min-h-[80vh] items-center">
           <Text className="text-2xl font-black">Register here </Text>
-          
+
           <Image source={image.loginImage} resizeMode="contain" />
           <FormField
             title="Employee Id"

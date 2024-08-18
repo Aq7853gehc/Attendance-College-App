@@ -27,10 +27,9 @@ const SignIn = () => {
        const result = await getCurrentUser()
        setUser(result)
        
-      //
       router.replace("/home");
     } catch (error:any) {
-      Alert.alert("Error", error.message);
+      Alert.alert("Error");
     } finally {
       setIsSubmitting(false);
     }

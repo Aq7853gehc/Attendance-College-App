@@ -21,9 +21,18 @@ export const account = new Account(client);
 const database = new Databases(client);
 
 // for new account user
-export const createUser = async (email: string, password: string, empId: string) => {
+export const createUser = async (
+  email: string,
+  password: string,
+  empId: string
+) => {
   try {
-    const newAccount = account.create(ID.unique(), email, password, empId);
+    const newAccount = await account.create(
+      ID.unique(),
+      email,
+      password,
+      empId
+    );
     if (!newAccount) throw Error;
     await signIn(empId, password);
     const newUser = database.createDocument(
@@ -31,7 +40,7 @@ export const createUser = async (email: string, password: string, empId: string)
       config.userCollectionId,
       ID.unique(),
       {
-        accountId: (await newAccount).$id,
+        accountId: newAccount.$id,
         email,
         empId,
       }
@@ -65,6 +74,6 @@ export const getCurrentUser = async () => {
     if (!currentUser) throw Error;
     return (await currentUser).documents[0];
   } catch (error: any) {
-    Alert.alert("Err", error);
+    // Alert.alert("Err", error);
   }
 };
