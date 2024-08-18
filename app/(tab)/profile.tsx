@@ -7,6 +7,7 @@ const Profile = () => {
     <SafeAreaView className="flex-1">
     <View className="flex-1 items-center justify-center">
       <Text>Profile</Text>
+      <Text className='font-medium text-xl p-3 text-blue-500'>Logout</Text>
     </View>
   </SafeAreaView>
   )

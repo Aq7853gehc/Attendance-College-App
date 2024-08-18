@@ -10,26 +10,26 @@ import { getCurrentUser, signIn } from "@/lib/appwrite";
 
 const SignIn = () => {
   const [form, setForm] = useState({
-    empid: "",
+    email: "",
     password: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const {setUser} = useUserContext()
 
   const submit = async() => {
-    if ( !form.empid || !form.password) {
+    if ( !form.email || !form.password) {
       Alert.alert("Error", "Please fill all the fields");
     }
     setIsSubmitting(true);
     try {
       // await account.deleteSession('current')
-       await signIn(form.empid, form.password);
+       await signIn(form.email, form.password);
        const result = await getCurrentUser()
        setUser(result)
        
       router.replace("/home");
     } catch (error:any) {
-      Alert.alert("Error");
+      Alert.alert(JSON.stringify(error.message));
     } finally {
       setIsSubmitting(false);
     }
@@ -45,11 +45,11 @@ const SignIn = () => {
           </Text>
           <Image source={image.loginImage} resizeMode="contain" />
           <FormField
-            title="Employee Id"
-            value={form.empid}
-            handleChangeText={(e) => setForm({ ...form, empid: e })}
+            title="Email"
+            value={form.email}
+            handleChangeText={(e) => setForm({ ...form, email: e })}
             otherStyle="mt-5"
-            placeholder="Employee ID"
+            placeholder="abc@gmail.com"
           />
           <FormField
             title="Password"

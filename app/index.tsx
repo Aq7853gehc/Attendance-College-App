@@ -46,7 +46,7 @@ const haversineDistance = (
       Math.sin(deltaLon / 2) *
       Math.sin(deltaLon / 2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  console.log(c);
+  // console.log(c);
 
   const distance = R * c; // in meters
   return distance;
@@ -56,8 +56,10 @@ const index = () => {
   const [location, setLocation] = useState(null);
   const [ustatus, setUstatus] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
-  const {isLoading,isLoggedIn} = useUserContext()
-  if(!isLoading&&isLoggedIn)return <Redirect href={"/home"}/>
+  const { isLoading, isLoggedIn } = useUserContext();
+  useEffect(() => {
+    if (!isLoading && isLoggedIn) return router.replace("/home");
+  }, [isLoading, isLoggedIn]);
 
   const onRefresh = async () => {
     setRefreshing(true);
@@ -152,11 +154,7 @@ const index = () => {
               <Text>{location?.coords.longitude}</Text> */}
             </View>
             <View className="flex-row w-full justify-evenly">
-              <Button
-                title="Login"
-                onPress={() => router.push("/sign-in")}
-            
-              />
+              <Button title="Login" onPress={() => router.push("/sign-in")} />
               <Button
                 title="Register"
                 onPress={() => router.push("/sign-up")}

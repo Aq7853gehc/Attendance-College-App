@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {
   View,
   Text,
@@ -18,24 +19,24 @@ import { Models } from "react-native-appwrite";
 
 const SignIn = () => {
   const [form, setForm] = useState({
-    empid: "",
+    username: "",
     email: "",
     password: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const submit = async () => {
-    if (!form.empid || !form.email || !form.password) {
+    if (!form.username || !form.email || !form.password) {
       Alert.alert("Error", "Please fill all the fields");
       return ;
     }
     setIsSubmitting(true);
     try {
-      await createUser(form.email, form.password, form.empid)
+      await createUser(form.email, form.password, form.username)
       router.replace("/home")
       //
     } catch (error: any) {
-       Alert.alert(JSON.stringify(error));
+       Alert.alert(JSON.stringify(error.message));
     } finally {
       setIsSubmitting(false);
     }
@@ -49,11 +50,11 @@ const SignIn = () => {
 
           <Image source={image.loginImage} resizeMode="contain" />
           <FormField
-            title="Employee Id"
-            value={form.empid}
-            handleChangeText={(e) => setForm({ ...form, empid: e })}
+            title="Username"
+            value={form.username}
+            handleChangeText={(e) => setForm({ ...form, username: e })}
             otherStyle="mt-5"
-            placeholder="Employee ID"
+            placeholder="Username"
           />
           <FormField
             title="Email"
