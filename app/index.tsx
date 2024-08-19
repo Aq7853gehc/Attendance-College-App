@@ -58,8 +58,8 @@ const index = () => {
   const [refreshing, setRefreshing] = useState(false);
   const { isLoading, isLoggedIn } = useUserContext();
   useEffect(() => {
-    if (!isLoading && isLoggedIn) return router.replace("/home");
-  }, [isLoading, isLoggedIn]);
+    if (!isLoading && isLoggedIn&&ustatus) return router.replace("/home");
+  }, [isLoading, isLoggedIn,ustatus]);
 
   const onRefresh = async () => {
     setRefreshing(true);
