@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, Image, Alert } from "react-native";
+import { View, Text, TouchableOpacity, Image, Alert, StatusBar } from "react-native";
 // import Image from 'react-native-scalable-image';
 import * as LocalAuthentication from "expo-local-authentication";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -43,6 +43,7 @@ const LocalAuth = (props: any) => {
 
   return (
     <SafeAreaView className="flex-1">
+      <StatusBar barStyle={"dark-content"} />
       <View className="flex-1 items-center ">
         <View className="flex-auto">
           {/* Header */}

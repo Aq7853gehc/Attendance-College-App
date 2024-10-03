@@ -20,8 +20,8 @@ import CustomButton from "@/components/CustomizeButton";
 import { useUserContext } from "@/context/GlobalProvider";
 
 const permentLocation: Location.LocationRegion = {
-  latitude: 28.6365819, //28.5594146
-  longitude: 77.2727257, //77.2765477
+  latitude: 28.6366093, //28.5594146
+  longitude: 77.2728477, //77.2765477
   notifyOnEnter: true,
 
   radius: 50,
@@ -58,8 +58,8 @@ const index = () => {
   const [refreshing, setRefreshing] = useState(false);
   const { isLoading, isLoggedIn } = useUserContext();
   useEffect(() => {
-    if (!isLoading && isLoggedIn&&ustatus) return router.replace("/home");
-  }, [isLoading, isLoggedIn,ustatus]);
+    if (!isLoading && isLoggedIn && ustatus) return router.replace("/home");
+  }, [isLoading, isLoggedIn, ustatus]);
 
   const onRefresh = async () => {
     setRefreshing(true);

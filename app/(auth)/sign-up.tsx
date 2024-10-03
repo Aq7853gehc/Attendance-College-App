@@ -1,4 +1,3 @@
-// @ts-nocheck
 import {
   View,
   Text,
@@ -36,7 +35,8 @@ const SignIn = () => {
       router.replace("/home")
       //
     } catch (error: any) {
-       Alert.alert(JSON.stringify(error.message));
+       console.error(JSON.stringify(error.message));
+       Alert.alert("There is an ERROR")
     } finally {
       setIsSubmitting(false);
     }

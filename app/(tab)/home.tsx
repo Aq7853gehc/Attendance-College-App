@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TouchableOpacity, ScrollView, Image } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, Image, StatusBar } from "react-native";
 import { useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialIcons } from "@expo/vector-icons"; // Importing icons for a modern look
@@ -10,7 +10,7 @@ const StaffHomePage = () => {
   return (
     <SafeAreaView className="flex-1">
       <ScrollView className="flex-1 bg-gray-100 p-4">
-        
+      <StatusBar barStyle={"dark-content"} />
         {/* User Information Section */}
         <View className="flex flex-row items-center bg-white p-4 rounded-xl shadow-lg mb-6">
           <Image
@@ -42,10 +42,10 @@ const StaffHomePage = () => {
 
         {/* Recent Records Section */}
         <View className="mb-6">
+          <View className="bg-white p-4 rounded-xl shadow-lg">
           <Text className="text-2xl font-bold text-gray-800 mb-4">
             Recent Attendance
           </Text>
-          <View className="bg-white p-4 rounded-xl shadow-lg">
             <View className="mb-4">
               <Text className="text-lg font-semibold text-gray-700">
                 August 18, 2024
