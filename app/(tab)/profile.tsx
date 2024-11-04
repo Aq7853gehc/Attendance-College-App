@@ -6,18 +6,24 @@ import {
   ScrollView,
   Image,
   StatusBar,
+  Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { MaterialIcons } from "@expo/vector-icons"; // Importing icons for profile and settings
+import { MaterialIcons } from "@expo/vector-icons"; 
 import { logoutAccount } from "@/lib/appwrite";
 import { useRouter } from "expo-router";
 
 const ProfilePage = () => {
-  const router = useRouter()
-  const logOut=async()=>{
-    logoutAccount()
-    router.replace("/")
-  }
+  const router = useRouter();
+  const logOut = async () => {
+    await logoutAccount()
+      .then(() => {
+        router.replace("/");
+      })
+      .catch(() => {
+        Alert.alert("NOT LOG-OUT yet");
+      });
+  };
   return (
     <SafeAreaView className="flex-1">
       <ScrollView className="flex-1 bg-gray-100 p-4">
@@ -46,6 +52,10 @@ const ProfilePage = () => {
             <Text className="text-lg font-medium text-gray-600">Name:</Text>
             <Text className="text-xl font-bold text-gray-800">John Doe</Text>
           </View>
+          <View className="mb-4">
+            <Text className="text-lg font-medium text-gray-600">User Name:</Text>
+            <Text className="text-xl font-bold text-gray-800">John123</Text>
+          </View>
 
           <View className="mb-4">
             <Text className="text-lg font-medium text-gray-600">Email:</Text>
@@ -54,35 +64,11 @@ const ProfilePage = () => {
             </Text>
           </View>
 
-          <View className="mb-4">
-            <Text className="text-lg font-medium text-gray-600">
-              Phone Number:
-            </Text>
-            <Text className="text-xl font-bold text-gray-800">
-              +1 234 567 8901
-            </Text>
-          </View>
-
           <View className="mb-6">
             <Text className="text-lg font-medium text-gray-600">
               Designation:
             </Text>
             <Text className="text-xl font-bold text-gray-800">Professor</Text>
-          </View>
-
-          {/* Attendance Summary */}
-          <Text className="text-2xl font-bold text-gray-800 mb-4">
-            Attendance Summary
-          </Text>
-          <View className="flex flex-row justify-between items-center">
-            <View className="flex items-center">
-              <Text className="text-3xl font-bold text-green-600">80%</Text>
-              <Text className="text-lg font-medium text-gray-600">Present</Text>
-            </View>
-            <View className="flex items-center">
-              <Text className="text-3xl font-bold text-red-600">20%</Text>
-              <Text className="text-lg font-medium text-gray-600">Absent</Text>
-            </View>
           </View>
         </View>
 
@@ -98,7 +84,7 @@ const ProfilePage = () => {
             onPress={() => logOut()}
           >
             <MaterialIcons name="logout" size={24} color="red" />
-            <Text className="ml-4 text-lg font-medium text-red-600">
+            <Text className="ml-4 text-lg font-medium text-red-500">
               Logout
             </Text>
           </TouchableOpacity>

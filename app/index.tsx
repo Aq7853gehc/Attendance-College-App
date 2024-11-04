@@ -20,8 +20,8 @@ import CustomButton from "@/components/CustomizeButton";
 import { useUserContext } from "@/context/GlobalProvider";
 
 const permentLocation: Location.LocationRegion = {
-  latitude: 28.559108, //28.5594146
-  longitude: 77.27655, //77.2765477
+  latitude: 28.6366129, //28.5594146
+  longitude: 77.2727538, //77.2765477
   notifyOnEnter: true,
 
   radius: 100,

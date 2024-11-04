@@ -3,12 +3,16 @@ import { View, Text, TouchableOpacity, Image, Alert, StatusBar } from "react-nat
 // import Image from 'react-native-scalable-image';
 import * as LocalAuthentication from "expo-local-authentication";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { submitAttendance } from "@/lib/appwrite";
+import { useUserContext } from "@/context/GlobalProvider";
 
 const fingerPrintImage = require("../../assets/images/fingerprint.png");
 
 const LocalAuth = (props: any) => {
   const [compatible, isCompatible] = useState(false);
   const [fingerPrints, setFingerPrints] = useState(false);
+
+  const {user} = useUserContext()
 
   useEffect(() => {
     checkDeviceForHardware();
@@ -34,7 +38,8 @@ const LocalAuth = (props: any) => {
     });
     if (result.success) {
       Alert.alert("Attendance Marked");
-      console.log(result);
+      const now = new Date();
+      submitAttendance(user?.$id,now,true)
     } else {
       Alert.alert("Attendance Marked failed");
       console.log(result);
@@ -45,11 +50,11 @@ const LocalAuth = (props: any) => {
     <SafeAreaView className="flex-1">
       <StatusBar barStyle={"dark-content"} />
       <View className="flex-1 items-center ">
-        <View className="flex-auto">
-          {/* Header */}
+        <View className="flex-[3]">
           <Text className="text-3xl font-bold">Attendance</Text>
+          {/* Header */}
         </View>
-        <View className="flex-[2]">{/* Face recognisation */}</View>
+       
         <View className="flex-1 bg-white  w-screen items-center justify-center shadow-lg rounded-ss-3xl">
           {/* Biometrric authentication */}
           <TouchableOpacity onPress={() => scanFingerprint()}>
