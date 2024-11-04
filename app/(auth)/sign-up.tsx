@@ -21,6 +21,7 @@ const SignIn = () => {
     username: "",
     email: "",
     password: "",
+    name:""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -31,7 +32,7 @@ const SignIn = () => {
     }
     setIsSubmitting(true);
     try {
-      await createUser(form.email, form.password, form.username)
+      await createUser(form.email, form.password, form.username, form.name)
       router.replace("/home")
       //
     } catch (error: any) {
@@ -55,6 +56,13 @@ const SignIn = () => {
             handleChangeText={(e) => setForm({ ...form, username: e })}
             otherStyle="mt-5"
             placeholder="Username"
+          />
+          <FormField
+            title="Name"
+            value={form.name}
+            handleChangeText={(e) => setForm({ ...form, name: e })}
+            otherStyle="mt-5"
+            placeholder="name"
           />
           <FormField
             title="Email"

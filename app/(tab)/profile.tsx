@@ -8,10 +8,16 @@ import {
   StatusBar,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { MaterialIcons, Ionicons, Feather } from "@expo/vector-icons"; // Importing icons for profile and settings
+import { MaterialIcons } from "@expo/vector-icons"; // Importing icons for profile and settings
 import { logoutAccount } from "@/lib/appwrite";
+import { useRouter } from "expo-router";
 
 const ProfilePage = () => {
+  const router = useRouter()
+  const logOut=async()=>{
+    logoutAccount()
+    router.replace("/")
+  }
   return (
     <SafeAreaView className="flex-1">
       <ScrollView className="flex-1 bg-gray-100 p-4">
@@ -89,7 +95,7 @@ const ProfilePage = () => {
           {/* Logout */}
           <TouchableOpacity
             className="flex flex-row items-center py-4"
-            onPress={() => logoutAccount()}
+            onPress={() => logOut()}
           >
             <MaterialIcons name="logout" size={24} color="red" />
             <Text className="ml-4 text-lg font-medium text-red-600">

@@ -20,11 +20,11 @@ import CustomButton from "@/components/CustomizeButton";
 import { useUserContext } from "@/context/GlobalProvider";
 
 const permentLocation: Location.LocationRegion = {
-  latitude: 28.6366093, //28.5594146
-  longitude: 77.2728477, //77.2765477
+  latitude: 28.559108, //28.5594146
+  longitude: 77.27655, //77.2765477
   notifyOnEnter: true,
 
-  radius: 50,
+  radius: 100,
 };
 
 const haversineDistance = (
@@ -178,30 +178,3 @@ const index = () => {
 
 export default index;
 
-//  Mosque
-// latitude :28.635349
-// longitute : 77.273376
-
-/**
- * Home (Aquib)
- * latitude : 28.6365945
- * logitute : 77.2729001
- * accuracy : 100
- */
-
-/**
- * import { GeofencingEventType } from 'expo-location';
-import * as TaskManager from 'expo-task-manager';
-
- TaskManager.defineTask(YOUR_TASK_NAME, ({ data: { eventType, region }, error }) => {
-  if (error) {
-    // check `error.message` for more details.
-    return;
-  }
-  if (eventType === GeofencingEventType.Enter) {
-    console.log("You've entered region:", region);
-  } else if (eventType === GeofencingEventType.Exit) {
-    console.log("You've left region:", region);
-  }
-});
- */

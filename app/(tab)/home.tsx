@@ -3,10 +3,14 @@ import { View, Text, TouchableOpacity, ScrollView, Image, StatusBar } from "reac
 import { useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialIcons } from "@expo/vector-icons"; // Importing icons for a modern look
+import { UserContext, useUserContext } from "@/context/GlobalProvider";
+import { getAttData } from "@/lib/appwrite";
 
 const StaffHomePage = () => {
   const router = useRouter();
-
+  const {user} = useUserContext()
+  console.log(user)
+  
   return (
     <SafeAreaView className="flex-1">
       <ScrollView className="flex-1 bg-gray-100 p-4">
@@ -14,12 +18,12 @@ const StaffHomePage = () => {
         {/* User Information Section */}
         <View className="flex flex-row items-center bg-white p-4 rounded-xl shadow-lg mb-6">
           <Image
-            source={{ uri: 'https://i.pravatar.cc/250?u=mail@ashallendesign.co.uk' }} // Replace with actual avatar URL
+            source={{ uri: user?.avatar }} // Replace with actual avatar URL
             className="w-16 h-16 rounded-full"
           />
           <View className="ml-4">
-            <Text className="text-xl font-bold text-gray-800">John Doe</Text>
-            <Text className="text-md text-gray-600">Professor</Text>
+            <Text className="text-xl font-bold text-gray-800">{user?.username}</Text>
+            <Text className="text-md text-gray-600">{user?.email}</Text>
           </View>
         </View>
 
