@@ -27,23 +27,7 @@ const StaffHomePage = () => {
           </View>
         </View>
 
-        {/* Attendance Summary Section */}
-        <View className="mb-6 bg-white p-4 rounded-xl shadow-lg">
-          <Text className="text-2xl font-bold text-gray-800 mb-4">
-            Attendance Summary
-          </Text>
-          <View className="flex flex-row justify-between items-center">
-            <View className="flex items-center">
-              <Text className="text-3xl font-bold text-green-600">80%</Text>
-              <Text className="text-lg font-medium text-gray-600">Present</Text>
-            </View>
-            <View className="flex items-center">
-              <Text className="text-3xl font-bold text-red-600">20%</Text>
-              <Text className="text-lg font-medium text-gray-600">Absent</Text>
-            </View>
-          </View>
-        </View>
-
+        
         {/* Recent Records Section */}
         <View className="mb-6">
           <View className="bg-white p-4 rounded-xl shadow-lg">
