@@ -23,7 +23,7 @@ const StaffHomePage = () => {
   const { user } = useUserContext();
   const [refresh, setrefresh] = useState(false);
   const [attData, setAttData] = useState([]);
-  console.log("Attendance data ", attData);
+  // console.log("Attendance data ", attData);
   useEffect(() => {
     const fetch = async () => {
       const data = await getAttendanceData(user?.$id);
@@ -87,6 +87,7 @@ const StaffHomePage = () => {
               <FlatList
                 data={attData}
                 keyExtractor={(item) => item.$id}
+                scrollEnabled={false}
                 renderItem={({ item }) => {
                   const formattedDate = new Date(item.date).toLocaleDateString(
                     "en-US",
